@@ -8,6 +8,27 @@
         <label for="password">Password</label>
         <input class="form-control" type="password" id="password" name="password">
     </div>
-
+    <p class="alert"></p>
     <input type="submit" class="btn btn-success">
 </form>
+
+<script>
+    $('#login-form').submit(function(event) {
+        event.preventDefault();
+
+        let data = $(this).serializeArray();
+
+        $.post($(this).attr('action'), data)
+        .then(function(response) {
+            response = JSON.parse(response);
+
+            if (response.error) {
+                $('.alert').addClass('alert-danger').html(response.error);
+
+                return;
+            }
+
+            window.location.hash = "#homepage";
+        })
+    })
+</script>

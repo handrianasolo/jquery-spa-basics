@@ -1,3 +1,33 @@
-<form action="/logout.php" method="POST">
+<form action="/logout.php" method="POST" id="logout-form">
     <input type="submit"  name="logout" value="Deconnexion">
 </form>
+
+<script>
+    /*$("form").click(function() {
+        $.ajax({
+            url: '/logout.php',
+            method: 'post',
+            success: function(data){
+                console.info(data)
+                window.location = '';
+            }
+        });
+    });*/
+
+    $('#logout-form').submit(function(event) {
+        event.preventDefault();
+
+        $.post($(this).attr('action'), [{name='logout'}])
+        .then(function(response) {
+            response = JSON.parse(response);
+
+            if (response.success) {
+                $('.logout').html('');
+                USER.security = false;
+
+                // IMPORTANT
+                $('body').trigger('SECURITY_LOGOUT');
+            }
+        })
+    })
+</script>

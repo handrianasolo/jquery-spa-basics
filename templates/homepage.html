@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <!-- afficher ici si l'utilisateur est connecté :
+    <!-- afficher ici si l'utilisateur est connecté : 
         <h2>Hi {{ First name }}</h2>
     -->
     <h3>Welcome to my awesome website</h3>
@@ -10,3 +10,9 @@
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi omnis deleniti hic quibusdam modi. Ipsum odio unde amet a, enim necessitatibus iste. Numquam harum in deserunt tempora iusto, impedit cum!
     </p>
 </div>
+
+<script>
+    if (USER.security) {
+        $('.jumbotron').prepend(`<h2>Hi ${USER.security.firstName}</h2>`);
+    }
+</script>

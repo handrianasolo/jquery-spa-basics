@@ -23,4 +23,38 @@
     <div class="form-group">
         <input type="submit" class="btn btn-primary">
     </div>
+    <p class="alert alert-success message"></p>
 </form>
+
+<script>
+    console.log(USER.security);
+
+    Object.keys(USER.security).forEach(function(prop){
+        let newProp = prop;
+
+        if (prop === 'firstName') newProp = 'first-name';
+
+        $('#' + newProp).val(USER.security[prop]);
+    });
+
+    $('#profile-form').submit(function(event) {
+        event.preventDefault();
+
+        let data = $(this).serializeArray();
+
+        // or each instead of map
+        data.map(function(field) {
+            if (field.name === 'first-name') {
+                field.name = 'firstName';
+            }
+        });
+
+        $.post($(this).attr('action'), data)
+        .then(function(response) {
+            if (!response.error) {
+                $('p.message', 'form').text('Saved');
+                USER.security = data;
+            }
+        });
+    });
+</script>
