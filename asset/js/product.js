@@ -67,5 +67,7 @@ $('body').on('ADD_CART', function(){
                         </li>`);
             ul.append(li);
         }
+
+        // J'AI PAS TROP REUSSI A AFFICHER LE PANIER :)
     });
 });
